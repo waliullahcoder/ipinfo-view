@@ -29,6 +29,12 @@ Route::get('user-register',[ApiController::class, 'apiRegister']);
 Route::get('user-list',[ApiController::class, 'apiRegisterGet']);
 Route::post('user-signup',[ApiController::class, 'apiRegisterPost']);
 
+//Permission
+Route::get('permission',[ApiController::class, 'permissionGet']);
+Route::post('permission-post',[ApiController::class, 'permissionPost']);
+Route::post('permission-update',[ApiController::class, 'permissionUpdate']);
+//Permission
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
     

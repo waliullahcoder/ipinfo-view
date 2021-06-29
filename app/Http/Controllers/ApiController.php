@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
+use App\Models\Permission;
 class ApiController extends Controller
 {
  
@@ -16,6 +17,50 @@ class ApiController extends Controller
      
         return view('welcome');
     }
+
+   //Permission
+    public function permissionGet()
+    {
+     
+        return view('permission');
+    }
+    public function permissionPost(Request $request)
+    {
+     
+        $inputs = $request->all();
+
+        $permissions  =  Permission::create($inputs);
+        $status = "OK"; 
+
+        if(!is_null($permissions) && $status == "OK") {
+            return back();
+            //return response()->json(['status' => $status, "message" => "Permission Success!"], Response::HTTP_ACCEPTED);
+        }
+        else {
+            return response()->json(["status" => "failed", "message" => "Permission failed!"], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function permissionUpdate(Request $request)
+    {
+     
+        $permissions = Permission::find($request->id);
+
+        $permissions->status = $request->status;
+
+
+        $status = "OK"; 
+
+        if(!is_null($permissions) && $status == "OK") {
+            $permissions->save();
+            return back();
+            //return response()->json(['status' => $status, "message" => "Permission Success!"], Response::HTTP_ACCEPTED);
+        }
+        else {
+            return response()->json(["status" => "failed", "message" => "Permission failed!"], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+    //Permission
 
     
 

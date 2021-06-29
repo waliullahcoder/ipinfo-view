@@ -1,3 +1,8 @@
+<?php $status=\App\Models\Permission::first()->status;?>
+@if($status==0)
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<center><span class="text-danger">This site is Deactivated By Administration</span></center>
+@else
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -273,6 +278,6 @@
                 </div>
             </div>
         </div>
-
+@endif
     </body>
 </html>
